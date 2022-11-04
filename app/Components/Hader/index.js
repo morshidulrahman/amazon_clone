@@ -4,11 +4,10 @@ import React from 'react'
 const index = () => {
     return (
         <header>
-            <div className='bg-[#131921] flex items-center px-2 flex-grow py-2 gap-2'>
+            <div className='bg-[#131921] flex items-center pl-2 pr-6 flex-grow py-2 gap-2'>
                 <div className='mt-2 flex items-center flex-grow sm:flex-grow-0 cursor-pointer
                 '>
-                    <img src={"/images/amazon-logo.png"} width={120} height={40}
-                        objectFit="contain" />
+                    <img src={"/images/amazon-logo.png"} width={120} height={40} />
                 </div>
                 {/* search */}
                 <div className='hidden sm:flex items-center h-10 flex-grow bg-yellow-400 hover:bg-yellow-500 rounded-md mx-4'>
@@ -17,7 +16,7 @@ const index = () => {
                     " />
                 </div>
                 {/* right */}
-                <div className='flex space-x-6 items-center text-white text-sm'>
+                <div className='flex space-x-5 items-center text-white text-sm '>
                     <div className='link'>
                         <p>Hello Morshidul Rahman</p>
                         <p className='font-extrabold sm:text-sm'>Account & links</p>
@@ -28,7 +27,7 @@ const index = () => {
                     </div>
                     <div className='link flex items-center relative'>
                         <span className='bg-yellow-400 w-4 h-4 flex items-center justify-center rounded-full absolute -top-1 right-10 text-xs text-black font-bold'>0</span>
-                        <AiOutlineShoppingCart size={28} />
+                        <AiOutlineShoppingCart size={29} />
                         <p className='font-extrabold sm:text-sm mt-2'>Basket</p>
                     </div>
                 </div>
