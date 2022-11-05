@@ -16,15 +16,16 @@ const Product = ({ id, title, price, description, category, image }) => {
 
     return (
         <div className='flex flex-col relative p-10 m-5 z-30 bg-white'>
-            <p>{category}</p>
-            <img src={image} alt="image" className='w-48 h-48 object-contain' />
-            <h4>{title}</h4>
+            <p className='capitalize absolute top-4 right-4 italic text-sm text-gray-400'>{category}</p>
+            <img src={image} alt="image" className='w-48 h-48 object-contain mx-auto' />
+            <h4 className='
+            my-3'>{title}</h4>
             <div className='flex'>
                 {Array(rating).fill().map((item, index) => (
                     <AiFillStar className='text-yellow-400' key={index} />
                 ))}
             </div>
-            <div>{description}</div>
+            <div className='my-3 line-clamp-2'>{description}</div>
             <div>
                 <Currency quantity={price} currency="GBP" />
             </div>
@@ -32,7 +33,7 @@ const Product = ({ id, title, price, description, category, image }) => {
                 hasprime && (
                     <div>
                         <img src='/images/prime.png' />
-                        <p>Free next-day Free Delivery</p>
+                        <p>Free next-day Delivery</p>
                     </div>
                 )
             }
