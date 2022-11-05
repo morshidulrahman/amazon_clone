@@ -16,9 +16,9 @@ const index = () => {
                     " />
                 </div>
                 {/* right */}
-                <div className='flex space-x-5 items-center text-white text-sm '>
+                <div className='flex space-x-2 md:space-x-5 items-center text-white text-[13px] '>
                     <div className='link'>
-                        <p>Hello Morshidul Rahman</p>
+                        <p>Hello, Morshidul</p>
                         <p className='font-extrabold sm:text-sm'>Account & links</p>
                     </div>
                     <div className='link'>
@@ -26,9 +26,9 @@ const index = () => {
                         <p className='font-extrabold sm:text-sm'>& Orders</p>
                     </div>
                     <div className='link flex items-center relative'>
-                        <span className='bg-yellow-400 w-4 h-4 flex items-center justify-center rounded-full absolute -top-1 right-10 text-xs text-black font-bold'>0</span>
+                        <span className='bg-yellow-400 w-4 h-4 flex items-center justify-center rounded-full absolute -top-1 right-11 text-xs text-black font-bold'>0</span>
                         <AiOutlineShoppingCart size={29} />
-                        <p className='font-extrabold sm:text-sm mt-2'>Basket</p>
+                        <p className='font-extrabold sm:text-sm mt-2 ml-1'>Basket</p>
                     </div>
                 </div>
             </div>
