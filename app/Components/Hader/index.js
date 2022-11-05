@@ -1,10 +1,10 @@
-import { AiOutlineSearch, AiOutlineShoppingCart } from 'react-icons/ai';
+import { AiOutlineSearch, AiOutlineShoppingCart, AiOutlineMenu } from 'react-icons/ai';
 import React from 'react'
 
 const index = () => {
     return (
         <header>
-            <div className='bg-[#131921] flex items-center pl-2 pr-6 flex-grow py-2 gap-2'>
+            <div className='bg-[#131921] flex items-center pl-4 pr-6 flex-grow py-2 gap-2'>
                 <div className='mt-2 flex items-center flex-grow sm:flex-grow-0 cursor-pointer
                 '>
                     <img src={"/images/amazon-logo.png"} width={120} height={40} />
@@ -33,8 +33,20 @@ const index = () => {
                 </div>
             </div>
             {/* bottom nav */}
-            <div>
-
+            <div className='flex items-center bg-[#232F3E] text-white p-2 pl-4 space-x-3'>
+                <p className='flex link items-center space-x-3'>
+                    <AiOutlineMenu size={25} />
+                    <span>All</span>
+                </p>
+                <p className='link'>Prime video</p>
+                <p className='link'>Amazon Business</p>
+                <p className='link'>Today's Deals</p>
+                <p className='link hidden lg:inline-flex'>Electronics</p>
+                <p className='link hidden lg:inline-flex'>Food & Grocery</p>
+                <p className='link hidden lg:inline-flex'>Prime</p>
+                <p className='link hidden lg:inline-flex'>Buy Again</p>
+                <p className='link hidden lg:inline-flex'>Shooper Toolkit</p>
+                <p className='link hidden lg:inline-flex'>Health & Personal Care</p>
             </div>
         </header>
     )
