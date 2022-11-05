@@ -1,7 +1,12 @@
-import { Header } from "../app/Components"
+import { Banner, Header } from "../app/Components"
 
 export default function Home() {
   return (
-    <Header />
+    <>
+      <Header />
+      <main className="max-w-screen-2xl mx-auto">
+        <Banner />
+      </main>
+    </>
   )
 }
