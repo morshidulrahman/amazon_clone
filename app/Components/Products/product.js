@@ -15,29 +15,36 @@ const Product = ({ id, title, price, description, category, image }) => {
     }, [])
 
     return (
-        <div className='flex flex-col relative p-10 m-5 z-30 bg-white'>
+        <div className='flex flex-col relative p-10 m-5 z-30 bg-white rounded-sm'>
             <p className='capitalize absolute top-4 right-4 italic text-sm text-gray-400'>{category}</p>
             <img src={image} alt="image" className='w-48 h-48 object-contain mx-auto' />
             <h4 className='
-            my-3'>{title}</h4>
+            my-3 line-clamp-1'>{title}</h4>
             <div className='flex'>
                 {Array(rating).fill().map((item, index) => (
                     <AiFillStar className='text-yellow-400' key={index} />
                 ))}
             </div>
             <div className='my-3 line-clamp-2'>{description}</div>
-            <div>
-                <Currency quantity={price} currency="GBP" />
-            </div>
+            {!hasprime ? (
+                <div className='font-semibold mb-12'>
+                    <Currency quantity={price} currency="GBP" />
+                </div>
+            ) : (
+                <div className='font-semibold mb-3'>
+                    <Currency quantity={price} currency="GBP" />
+                </div>
+            )}
             {
                 hasprime && (
-                    <div>
-                        <img src='/images/prime.png' />
-                        <p>Free next-day Delivery</p>
+                    <div className='flex  mb-3 space-x-3'>
+                        <img src='/images/prime.png' className='w-[40px]' />
+                        <p className='font-semibold text-sm
+                        '>Free next-day Delivery</p>
                     </div>
                 )
             }
-            <div>Add to basket</div>
+            <div className='mx-auto button'>Add to basket</div>
         </div>
     )
 }
