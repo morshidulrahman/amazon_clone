@@ -1,14 +1,19 @@
 import { AiOutlineSearch, AiOutlineShoppingCart, AiOutlineMenu } from 'react-icons/ai';
 import React from 'react'
 import { useSession, signIn, signOut } from "next-auth/react"
-
+import { useRouter } from 'next/router';
 const index = () => {
+    const { data: session } = useSession()
+    const router = useRouter()
     return (
         <header>
             <div className='bg-[#131921] flex items-center pl-4 pr-6 flex-grow py-2 gap-2'>
                 <div className='mt-2 flex items-center flex-grow sm:flex-grow-0 cursor-pointer
                 '>
-                    <img src={"/images/amazon-logo.png"} width={120} height={40} />
+                    <img
+                        onClick={() => router.push("/")}
+                        src={"/images/amazon-logo.png"}
+                        width={120} height={40} />
                 </div>
                 {/* search */}
                 <div className='hidden sm:flex items-center h-10 flex-grow bg-yellow-400 hover:bg-yellow-500 rounded-md mx-4'>
@@ -18,15 +23,17 @@ const index = () => {
                 </div>
                 {/* right */}
                 <div className='flex space-x-2 md:space-x-5 items-center text-white text-[13px] '>
-                    <div className='link' onClick={signIn}>
-                        <p>Hello, Morshidul</p>
+                    <div className='link' onClick={!session ? signIn : signOut}>
+                        <p>
+                            {session ? `Hello ${session.user.name}` : "Sing In"}
+                        </p>
                         <p className='font-extrabold sm:text-sm'>Account & links</p>
                     </div>
                     <div className='link'>
                         <p>Returns</p>
                         <p className='font-extrabold sm:text-sm'>& Orders</p>
                     </div>
-                    <div className='link flex items-center relative'>
+                    <div className='link flex items-center relative' onClick={() => router.push("/checkout")}>
                         <span className='bg-yellow-400 w-4 h-4 flex items-center justify-center rounded-full absolute -top-1 right-11 text-xs text-black font-bold'>0</span>
                         <AiOutlineShoppingCart size={29} />
                         <p className='font-extrabold sm:text-sm mt-2 ml-1'>Basket</p>
