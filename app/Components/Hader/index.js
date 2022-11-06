@@ -2,8 +2,13 @@ import { AiOutlineSearch, AiOutlineShoppingCart, AiOutlineMenu } from 'react-ico
 import React from 'react'
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux'
+import { SelectedItems } from '../../redux/slices/Basketslice';
+
 const index = () => {
     const { data: session } = useSession()
+    const items = useSelector(SelectedItems)
+
     const router = useRouter()
     return (
         <header>
@@ -34,7 +39,9 @@ const index = () => {
                         <p className='font-extrabold sm:text-sm'>& Orders</p>
                     </div>
                     <div className='link flex items-center relative' onClick={() => router.push("/checkout")}>
-                        <span className='bg-yellow-400 w-4 h-4 flex items-center justify-center rounded-full absolute -top-1 right-11 text-xs text-black font-bold'>0</span>
+                        <span className='bg-yellow-400 w-4 h-4 flex items-center justify-center rounded-full absolute -top-1 right-11 text-xs text-black font-bold'>
+                            {items.length}
+                        </span>
                         <AiOutlineShoppingCart size={29} />
                         <p className='font-extrabold sm:text-sm mt-2 ml-1'>Basket</p>
                     </div>

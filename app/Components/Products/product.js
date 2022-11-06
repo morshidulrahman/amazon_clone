@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { AiFillStar } from 'react-icons/ai';
 import Currency from 'react-currency-formatter';
-
+import { useDispatch } from 'react-redux'
+import { addToBasket } from '../../redux/slices/Basketslice';
 const MaxNumber = 5
 const MinNumber = 1
 
 const Product = ({ id, title, price, description, category, image }) => {
     const [rating, setrating] = useState(2)
     const [hasprime, setprime] = useState(0.1)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         setprime(Math.random() < 0.5)
         setrating(Math.floor(Math.random() * (MaxNumber - MinNumber + 1) + MinNumber))
     }, [])
+
+    const addtoitemsbasket = () => {
+        dispatch(addToBasket(
+            {
+                id, title, price, description, category, image
+            }
+        ))
+    }
 
     return (
         <div className='flex flex-col relative p-10 m-5 z-30 bg-white rounded-sm'>
@@ -44,7 +54,7 @@ const Product = ({ id, title, price, description, category, image }) => {
                     </div>
                 )
             }
-            <div className='mx-auto button'>Add to basket</div>
+            <div className='mx-auto button' onClick={addtoitemsbasket}>Add to basket</div>
         </div>
     )
 }
