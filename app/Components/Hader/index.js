@@ -1,5 +1,6 @@
 import { AiOutlineSearch, AiOutlineShoppingCart, AiOutlineMenu } from 'react-icons/ai';
 import React from 'react'
+import { useSession, signIn, signOut } from "next-auth/react"
 
 const index = () => {
     return (
@@ -17,7 +18,7 @@ const index = () => {
                 </div>
                 {/* right */}
                 <div className='flex space-x-2 md:space-x-5 items-center text-white text-[13px] '>
-                    <div className='link'>
+                    <div className='link' onClick={signIn}>
                         <p>Hello, Morshidul</p>
                         <p className='font-extrabold sm:text-sm'>Account & links</p>
                     </div>
