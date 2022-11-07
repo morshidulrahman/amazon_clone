@@ -48,7 +48,7 @@ const Product = ({ id, title, price, description, category, image }) => {
             {
                 hasprime && (
                     <div className='flex  mb-3 space-x-3'>
-                        <img src='/images/prime.png' className='w-[40px]' />
+                        <img src='/images/prime.png' className='w-[40px]' alt="delivery" />
                         <p className='font-semibold text-sm
                         '>Free next-day Delivery</p>
                     </div>

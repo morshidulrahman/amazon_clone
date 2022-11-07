@@ -16,7 +16,7 @@ const Checkout = () => {
             <main className='lg:flex max-w-screen-2xl mx-auto lg:w-[1150px]'>
                 {/* left */}
                 <div className='flex-grow m-5 shadow-sm'>
-                    <img src="https://cdn.mos.cms.futurecdn.net/ZefaoejrEEiKKo7pBmCaL6.jpg" className="object-cover w-[1020px] h-[350px]" />
+                    <img src="https://cdn.mos.cms.futurecdn.net/ZefaoejrEEiKKo7pBmCaL6.jpg" className="object-cover w-[1020px] h-[350px]" alt="chekcout" />
                     <div className='flex flex-col py-10 bg-white p-5'>
                         <h1 className='border-b text-3xl pb-4 capitalize font-semibold'>
                             {items.length === 0 ? "your shoping basket is empty" : "your shoping basket"}
@@ -50,7 +50,7 @@ const Checkout = () => {
 
                                 <button
                                     disabled={!session}
-                                    className={`button mt-2 font-semibold ${!session && " bg-gradient-to-t from-gray-500 to-gray-300 border-gray-200 text-gray-300 cursor-not-allowed"}`}>
+                                    className={`button mt-3 shadow-md font-semibold ${!session && " bg-gradient-to-t from-gray-500 to-gray-300 border-gray-200 text-gray-300 cursor-not-allowed"}`}>
                                     {!session ? "Sing in to checkout" : "Proced to chekout"}
                                 </button>
                             </>

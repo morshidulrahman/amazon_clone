@@ -18,7 +18,9 @@ const index = () => {
                     <img
                         onClick={() => router.push("/")}
                         src={"/images/amazon-logo.png"}
-                        width={120} height={40} />
+                        width={120} height={40}
+                        alt="logo"
+                    />
                 </div>
                 {/* search */}
                 <div className='hidden sm:flex items-center h-10 flex-grow bg-yellow-400 hover:bg-yellow-500 rounded-md mx-4'>

@@ -13,7 +13,7 @@ const CheckoutProduct = ({ id, title, price, description, category, image, ratin
     }
     return (
         <div className='grid grid-cols-5 my-5'>
-            <img src={image} className="w-48 h-48 object-contain" />
+            <img src={image} className="w-48 h-48 object-contain" alt={title} />
             <div className='col-span-3 mx-5'>
                 <p className='font-semibold my-2 line-clamp-1'>{title}</p>
                 <div className='flex'>
@@ -34,7 +34,7 @@ const CheckoutProduct = ({ id, title, price, description, category, image, ratin
                 {
                     hasprime && (
                         <div className='flex  mb-3 space-x-3'>
-                            <img src='/images/prime.png' className='w-[40px]' />
+                            <img src='/images/prime.png' className='w-[40px]' alt="delivery" />
                             <p className='font-semibold text-sm
                         '>Free next-day Delivery</p>
                         </div>
