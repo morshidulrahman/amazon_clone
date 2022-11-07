@@ -19,7 +19,7 @@ const Product = ({ id, title, price, description, category, image }) => {
     const addtoitemsbasket = () => {
         dispatch(addToBasket(
             {
-                id, title, price, description, category, image
+                id, title, price, description, category, image, rating, hasprime
             }
         ))
     }

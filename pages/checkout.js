@@ -1,16 +1,10 @@
-import React, { useState } from 'react'
 import { Header } from '../app/Components'
 import { useSelector } from 'react-redux'
 import { SelectedItems } from '../app/redux/slices/Basketslice'
 import CheckoutProduct from '../app/Components/Products/CheckoutProduct'
-const checkout = () => {
+
+const Checkout = () => {
     const items = useSelector(SelectedItems)
-    const [hasprime, setprime] = useState(0.1)
-    const [rating, setrating] = useState(2)
-    useEffect(() => {
-        setprime(Math.random() < 0.5)
-        setrating(Math.floor(Math.random() * (MaxNumber - MinNumber + 1) + MinNumber))
-    }, [])
     return (
         <div className='bg-gray-100'>
             <Header />
@@ -26,13 +20,13 @@ const checkout = () => {
                             items.map((items, i) => (
                                 <CheckoutProduct
                                     id={items.id}
-                                    title={items.id}
+                                    title={items.title}
                                     price={items.price}
                                     description={items.description}
                                     category={items.category}
-                                    image={items.category}
-                                    hasprime={hasprime}
-                                    rating={rating}
+                                    image={items.image}
+                                    hasprime={items.hasprime}
+                                    rating={items.rating}
                                     key={i} />
                             ))
                         }
@@ -43,4 +37,4 @@ const checkout = () => {
     )
 }
 
-export default checkout
+export default Checkout

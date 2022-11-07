@@ -9,7 +9,16 @@ export const BasketSlice = createSlice({
       addToBasket: (state, action) => {
          state.items = [...state.items, action.payload]
       },
-      removeFromBasket: (state, action) => { }
+      removeFromBasket: (state, action) => {
+         const index = state.items.findIndex(basket => basket.id === action.payload.id)
+         let newbasket = [...state.items]
+         if (index >= 0) {
+            newbasket.splice(index, 1)
+         } else {
+            console.warn(` can't not fid id please ${action.payload.id} push the data`)
+         }
+         state.items = newbasket
+      }
    },
 })
 
