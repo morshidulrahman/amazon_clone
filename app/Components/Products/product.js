@@ -29,7 +29,7 @@ const Product = ({ id, title, price, description, category, image }) => {
             <p className='capitalize absolute top-4 right-4 italic text-sm text-gray-400'>{category}</p>
             <img src={image} alt="image" className='w-48 h-48 object-contain mx-auto' />
             <h4 className='
-            my-3 line-clamp-1'>{title}</h4>
+            my-3 line-clamp-1 font-semibold'>{title}</h4>
             <div className='flex'>
                 {Array(rating).fill().map((item, index) => (
                     <AiFillStar className='text-yellow-400' key={index} />
@@ -54,7 +54,7 @@ const Product = ({ id, title, price, description, category, image }) => {
                     </div>
                 )
             }
-            <div className='mx-auto button' onClick={addtoitemsbasket}>Add to basket</div>
+            <div className='mx-auto button font-semibold' onClick={addtoitemsbasket}>Add to basket</div>
         </div>
     )
 }
