@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  experimental: { appDir: true },
   env: {
     FIREBASE_API_KEY: "AIzaSyAfiHR5I2rcBr6rlfeOQp8rJzHlzDg8d2Q",
     FIREBASE_AUTH_DOMAIN: "fir-56958.firebaseapp.com",

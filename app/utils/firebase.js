@@ -9,10 +9,11 @@ const firebaseConfig = {
     appId: process.env.FIREBASE_APP_ID
 };
 
-const app = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app()
+
+const app = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
+
 const auth = app.auth()
 const db = app.firestore()
-const storage = firebase.storage()
 const timestamp = firebase.firestore.FieldValue.serverTimestamp()
 
-export { auth, db, timestamp, storage }
+export { auth, db, timestamp }

@@ -1,15 +1,20 @@
 import { AiOutlineSearch, AiOutlineShoppingCart, AiOutlineMenu } from 'react-icons/ai';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { SelectedItems } from '../../redux/slices/Basketslice';
+import { updateuser, removeuser, SelectUser } from '../../redux/slices/Authslice';
+import { auth } from '../../utils/firebase';
+
 
 const index = () => {
     const { data: session } = useSession()
     const items = useSelector(SelectedItems)
-
     const router = useRouter()
+    useEffect(() => {
+        const unsubscribe = auth.onAuth
+    })
     return (
         <header>
             <div className='bg-[#131921] flex items-center pl-4 pr-6 flex-grow py-2 gap-2 '>
