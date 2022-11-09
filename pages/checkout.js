@@ -3,13 +3,15 @@ import { useSelector } from 'react-redux'
 import { baskettotal, SelectedItems } from '../app/redux/slices/Basketslice'
 import CheckoutProduct from '../app/Components/Products/CheckoutProduct'
 import Currency from 'react-currency-formatter';
-import { useSession } from 'next-auth/react';
+import { SelectUser } from '../app/redux/slices/Authslice';
 
 
 const Checkout = () => {
     const items = useSelector(SelectedItems)
     const total = useSelector(baskettotal)
-    const { data: session } = useSession()
+    const user = useSelector(SelectUser)
+
+
     return (
         <div className='bg-gray-100'>
             <Header />
@@ -49,9 +51,9 @@ const Checkout = () => {
                                 </h2>
 
                                 <button
-                                    disabled={!session}
-                                    className={`button mt-3 shadow-md font-semibold ${!session && " bg-gradient-to-t from-gray-500 to-gray-300 border-gray-200 text-gray-300 cursor-not-allowed"}`}>
-                                    {!session ? "Sing in to checkout" : "Proced to chekout"}
+                                    disabled={!user}
+                                    className={`button mt-3 shadow-md font-semibold ${!user && " bg-gradient-to-t from-gray-500 to-gray-300 border-gray-200 text-gray-300 cursor-not-allowed"}`}>
+                                    {!user ? "Sing in to checkout" : "Proced to chekout"}
                                 </button>
                             </>
                         )

@@ -1,6 +1,6 @@
 import { AiOutlineSearch, AiOutlineShoppingCart, AiOutlineMenu } from 'react-icons/ai';
 import React, { useEffect } from 'react'
-import { useSession, signIn, signOut } from "next-auth/react"
+
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux'
 import { SelectedItems } from '../../redux/slices/Basketslice';
@@ -9,7 +9,7 @@ import { auth } from '../../utils/firebase';
 import firebase from 'firebase';
 
 const index = () => {
-    const { data: session } = useSession()
+
     const items = useSelector(SelectedItems)
     const user = useSelector(SelectUser)
     const router = useRouter()
@@ -58,19 +58,13 @@ const index = () => {
                 </div>
                 {/* right */}
                 <div className='flex space-x-2 md:space-x-5 items-center text-white text-[13px] '>
-                    <div className='link' >
-                        <p onClick={loginwithgoogle}>
+                    <div className='link' onClick={!user ? loginwithgoogle : singout} >
+                        <p >
                             {user ? `Hello ${user.name}` : "Sing In"}
                         </p>
-                        {user ? (
-                            <>
-                                <p onClick={singout} className="font-bold">SingOut</p>
-                            </>
-                        ) : (
-                            <>
-                                <p onClick={singout} className="font-bold">Account & Links</p>
-                            </>
-                        )}
+                        <p className='text-bold'>
+                            Account & Links
+                        </p>
                     </div>
                     <div className='link'>
                         <p>Returns</p>
