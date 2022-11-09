@@ -4,6 +4,9 @@ import { baskettotal, SelectedItems } from '../app/redux/slices/Basketslice'
 import CheckoutProduct from '../app/Components/Products/CheckoutProduct'
 import Currency from 'react-currency-formatter';
 import { SelectUser } from '../app/redux/slices/Authslice';
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios"
+const stopPromise = loadStripe(process.env.STRIPE_API_KEY)
 
 
 const Checkout = () => {
@@ -11,6 +14,16 @@ const Checkout = () => {
     const total = useSelector(baskettotal)
     const user = useSelector(SelectUser)
 
+
+    const checkoutSections = async () => {
+        const stripe = await stopPromise
+
+        const checkoutsession = await axios.post('/api/create-checkout-session', {
+            items: items,
+            email: user.email,
+
+        })
+    }
 
     return (
         <div className='bg-gray-100'>
@@ -51,6 +64,8 @@ const Checkout = () => {
                                 </h2>
 
                                 <button
+                                    onClick={checkoutSections}
+                                    role="link"
                                     disabled={!user}
                                     className={`button mt-3 shadow-md font-semibold ${!user && " bg-gradient-to-t from-gray-500 to-gray-300 border-gray-200 text-gray-300 cursor-not-allowed"}`}>
                                     {!user ? "Sing in to checkout" : "Proced to chekout"}
