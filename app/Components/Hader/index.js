@@ -6,15 +6,38 @@ import { useSelector, useDispatch } from 'react-redux'
 import { SelectedItems } from '../../redux/slices/Basketslice';
 import { updateuser, removeuser, SelectUser } from '../../redux/slices/Authslice';
 import { auth } from '../../utils/firebase';
-
+import firebase from 'firebase';
 
 const index = () => {
     const { data: session } = useSession()
     const items = useSelector(SelectedItems)
+    const user = useSelector(SelectUser)
     const router = useRouter()
+    const dispatch = useDispatch()
+
     useEffect(() => {
-        const unsubscribe = auth.onAuth
-    })
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user) {
+                dispatch(updateuser({
+                    name: user.displayName,
+                    email: user.email,
+                    image: user.photoURL
+                }))
+            } else {
+                dispatch(removeuser())
+            }
+        })
+
+        return unsubscribe
+    }, [])
+
+    const loginwithgoogle = () => {
+        const provider = new firebase.auth.GoogleAuthProvider()
+        auth.signInWithPopup(provider)
+    }
+    const singout = () => {
+        auth.signOut()
+    }
     return (
         <header>
             <div className='bg-[#131921] flex items-center pl-4 pr-6 flex-grow py-2 gap-2 '>
@@ -35,11 +58,19 @@ const index = () => {
                 </div>
                 {/* right */}
                 <div className='flex space-x-2 md:space-x-5 items-center text-white text-[13px] '>
-                    <div className='link' onClick={!session ? signIn : signOut}>
-                        <p>
-                            {session ? `Hello ${session.user.name}` : "Sing In"}
+                    <div className='link' >
+                        <p onClick={loginwithgoogle}>
+                            {user ? `Hello ${user.name}` : "Sing In"}
                         </p>
-                        <p className='font-extrabold sm:text-sm'>Account & links</p>
+                        {user ? (
+                            <>
+                                <p onClick={singout} className="font-bold">SingOut</p>
+                            </>
+                        ) : (
+                            <>
+                                <p onClick={singout} className="font-bold">Account & Links</p>
+                            </>
+                        )}
                     </div>
                     <div className='link'>
                         <p>Returns</p>
