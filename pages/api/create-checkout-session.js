@@ -1,33 +1,50 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 
-export default async (req, res) => {
-    const { email, items } = req.body
+export default async function (req, res) {
+    const { item, email } = req.body
 
-    const transformedItem = items.map((item) => (
-        {
-            price_data: {
-                currency: 'gbp',
-                product_data: {
-                    images: [item.image],
-                    name: item.name,
-                },
-                unit_amount: item.price * 100,
+    const line_items = item.map((cartItem) => ({
+        description: cartItem.description,
+        quantity: 1,
+        price_data: {
+            currency: 'GBP',
+            unit_amount: cartItem.price * 100,
+            product_data: {
+                name: cartItem.name,
+                images: [cartItem.image],
             },
-            description: item.description,
-            quantity: 1,
-        }
-    ))
-
-    const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        line_items: transformedItem,
-        mode: 'payment',
-        success_url: redirectURL + '?status=success',
-        cancel_url: redirectURL + '?status=cancel',
-        metadata: {
-            images: JSON.stringify(items.map(item => item.image)),
         },
-    });
+    }));
 
-    res.json({ id: session.id });
+    console.log(line_items)
+
+    try {
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ["card"],
+            line_items: [
+                {
+                    price: 'price_1M1YXBL6YvgZDvxunUXY0P4e',
+                    quantity: 1,
+                },
+            ],
+            mode: 'payment',
+            success_url: `${process.env.HOST}/success`,
+            cancel_url: `${process.env.HOST}/chekout`,
+            payment_intent_data: {
+                metadata: {
+                    email,
+                    images: JSON.stringify(item.map(item => item.image))
+                },
+            },
+        });
+        return res.status(200).json({
+            id: session.id,
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            message: error.message,
+        });
+    }
+
 }

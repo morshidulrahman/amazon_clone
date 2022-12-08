@@ -83,7 +83,7 @@ const index = () => {
             <div className='flex items-center bg-[#232F3E] text-white p-2 pl-4 space-x-3'>
                 <p className='flex link items-center space-x-3'>
                     <AiOutlineMenu size={25} />
-                    <span>All</span>
+                    <span onClick={() => router.push("/All")}>All</span >
                 </p>
                 <p className='link'>Prime video</p>
                 <p className='link'>Amazon Business</p>

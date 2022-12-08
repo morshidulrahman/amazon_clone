@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { AiFillStar } from 'react-icons/ai';
 import Currency from 'react-currency-formatter';
-import { useDispatch } from 'react-redux'
-import { addToBasket } from '../../redux/slices/Basketslice';
+import { useDispatch, useSelector } from 'react-redux'
+import { addToBasket, SelectedItems } from '../../redux/slices/Basketslice';
 const MaxNumber = 5
 const MinNumber = 1
 
 const Product = ({ id, title, price, description, category, image }) => {
+    const [isproduct, setisproduct] = useState(false)
     const [rating, setrating] = useState(2)
     const [hasprime, setprime] = useState(0.1)
+    const BasketItems = useSelector(SelectedItems)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -16,13 +18,34 @@ const Product = ({ id, title, price, description, category, image }) => {
         setrating(Math.floor(Math.random() * (MaxNumber - MinNumber + 1) + MinNumber))
     }, [])
 
+
+
     const addtoitemsbasket = () => {
-        dispatch(addToBasket(
-            {
-                id, title, price, description, category, image, rating, hasprime
-            }
-        ))
+
+        const product = {
+            id, title, price, description, category, image, rating, hasprime
+        }
+
+        if (isproduct) alert("product already addToBasket")
+        else {
+
+            setisproduct(true)
+
+            dispatch(addToBasket(product))
+        }
+
     }
+
+    useEffect(() => {
+        const filterdata = BasketItems.filter(item => item.id === id)
+
+        if (!!filterdata.length) {
+            setisproduct(true)
+            return
+        }
+
+    }, [isproduct])
+
 
     return (
         <div className='flex flex-col relative p-10 m-5 z-30 bg-white rounded-sm'>
@@ -54,7 +77,13 @@ const Product = ({ id, title, price, description, category, image }) => {
                     </div>
                 )
             }
-            <div className='mx-auto button font-semibold' onClick={addtoitemsbasket}>Add to basket</div>
+            <button
+                onClick={addtoitemsbasket}
+                role="link"
+                disabled={isproduct}
+                className={`button mt-3 shadow-md font-semibold mx-auto ${isproduct && " bg-gradient-to-t from-gray-500 to-gray-300 border-gray-200 text-gray-300 cursor-not-allowed"}`}>
+                {isproduct ? "Added to basket" : "Add to basket"}
+            </button>
         </div>
     )
 }
