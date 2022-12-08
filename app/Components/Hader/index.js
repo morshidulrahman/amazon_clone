@@ -39,7 +39,7 @@ const index = () => {
         auth.signOut()
     }
     return (
-        <header>
+        <header id="home">
             <div className='bg-[#131921] flex items-center pl-4 pr-6 flex-grow py-2 gap-2 '>
                 <div className='mt-2 flex items-center flex-grow sm:flex-grow-0 cursor-pointer
                 '>
