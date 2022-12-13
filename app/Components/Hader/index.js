@@ -2,12 +2,14 @@ import { AiOutlineSearch, AiOutlineShoppingCart, AiOutlineMenu } from 'react-ico
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux'
-import { SelectedItems, SelectProducts } from '../../redux/slices/Basketslice';
+import { SelectProducts } from '../../redux/slices/Productslice';
+
 import { updateuser, removeuser, SelectUser } from '../../redux/slices/Authslice';
 import { auth } from '../../utils/firebase';
 import firebase from 'firebase';
 import { AiOutlineClose } from 'react-icons/ai';
 import Currency from 'react-currency-formatter';
+import { SelectedItems } from '../../redux/slices/Basketslice';
 const index = () => {
     const [searchterm, setsearchterm] = useState("")
     const [showresults, setshowresults] = useState(false)

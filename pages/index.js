@@ -1,7 +1,7 @@
 import { Banner, Header, ProductFeed } from "../app/Components"
 import Footer from "./footer"
 import { useDispatch } from "react-redux"
-import { addtoProduct } from "../app/redux/slices/Basketslice"
+import { addtoProduct } from "../app/redux/slices/Productslice"
 import { useEffect } from "react"
 
 export default function Home({ products }) {

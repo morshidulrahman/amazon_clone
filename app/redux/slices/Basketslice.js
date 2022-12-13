@@ -6,9 +6,6 @@ export const BasketSlice = createSlice({
    name: 'basket',
    initialState,
    reducers: {
-      addtoProduct: (state, action) => {
-         state.items = action.payload
-      },
 
       addToBasket: (state, action) => {
          state.items = [...state.items, action.payload]
@@ -29,7 +26,7 @@ export const BasketSlice = createSlice({
 
 
 export const { addToBasket, removeFromBasket, addtoProduct } = BasketSlice.actions
-export const SelectProducts = (state) => state.basket.items
+
 export const SelectedItems = (state) => state.basket.items
 export const baskettotal = (state) => state.basket.items.reduce((total, item) => (total += item.price), 0)
 

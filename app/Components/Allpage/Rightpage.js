@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
 import Product from '../Products/product'
-import { SelectedItems } from '../../redux/slices/Basketslice'
 import { AiOutlineSearch } from 'react-icons/ai'
-const Rightpage = () => {
-    const products = useSelector(SelectedItems)
+const Rightpage = ({ handlesearch, products, searchterm }) => {
+
     const [showresults, setshowresults] = useState(true)
     return (
         <div className='col-span-1 md:col-span-3'>
@@ -13,6 +11,8 @@ const Rightpage = () => {
                     type="text"
                     placeholder='Search... '
                     className='h-full w-6 p-2 px-4 flex-grow  focus:outline-none rounded-l-md'
+                    value={searchterm}
+                    onChange={handlesearch}
                     onMouseOver={() => setshowresults(true)}
                     onBlur={() => setshowresults(false)}
                     onFocus={() => setshowresults(true)}
@@ -20,10 +20,24 @@ const Rightpage = () => {
                 <AiOutlineSearch size={24} className="mx-3 cursor-pointer" />
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-1">
-                {products.map((item, i) => (
-                    <Product key={i} {...item} />
+                {products?.map(({ id, title, price, description, category, image }) => (
+                    <Product
+                        key={id}
+                        id={id}
+                        title={title}
+                        price={price}
+                        description={description}
+                        category={category}
+                        image={image}
+                    />
                 ))}
             </div>
+            {products.length == 0 && (
+                <div className='flex items-center flex-col mt-8'>
+                    <img src='/images/npf.jpg' alt="not found" className='w-[50%] h-[30%] rounded-sm' />
+                    <p className='text-lg font-semibold mb-5'>product is not found</p>
+                </div>
+            )}
         </div>
     )
 }
