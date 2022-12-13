@@ -11,7 +11,7 @@ const Footer = () => {
             </a>
             <div className='bg-[#232F3E]'>
                 <div className='max-w-5xl mx-auto py-5'>
-                    <div className='flex gap-5 justify-between py-10'>
+                    <div className='flex gap-5 justify-between py-10 flex-wrap px-4 md:px-0'>
                         {FooterData.map((item, index) => (
                             <Footercard {...item} key={index} />
                         ))}

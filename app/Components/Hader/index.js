@@ -1,19 +1,22 @@
 import { AiOutlineSearch, AiOutlineShoppingCart, AiOutlineMenu } from 'react-icons/ai';
-import React, { useEffect } from 'react'
-
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux'
-import { SelectedItems } from '../../redux/slices/Basketslice';
+import { SelectedItems, SelectProducts } from '../../redux/slices/Basketslice';
 import { updateuser, removeuser, SelectUser } from '../../redux/slices/Authslice';
 import { auth } from '../../utils/firebase';
 import firebase from 'firebase';
-
+import { AiOutlineClose } from 'react-icons/ai';
+import Currency from 'react-currency-formatter';
 const index = () => {
-
+    const [searchterm, setsearchterm] = useState("")
+    const [showresults, setshowresults] = useState(false)
+    const [searchresults, setsearchresults] = useState([])
     const items = useSelector(SelectedItems)
     const user = useSelector(SelectUser)
     const router = useRouter()
     const dispatch = useDispatch()
+    const SelectedProducts = useSelector(SelectProducts)
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
@@ -38,6 +41,14 @@ const index = () => {
     const singout = () => {
         auth.signOut()
     }
+
+    const handlechnage = (e) => {
+        let term = e.target.value
+        setsearchterm(term)
+        setsearchresults(SelectedProducts.filter(item => item.name.includes(term) || item.company.includes(term) || item.category.includes(term)))
+
+    }
+
     return (
         <header id="home">
             <div className='bg-[#131921] flex items-center pl-4 pr-6 flex-grow py-2 gap-2 '>
@@ -51,11 +62,65 @@ const index = () => {
                     />
                 </div>
                 {/* search */}
-                <div className='hidden sm:flex items-center h-10 flex-grow bg-yellow-400 hover:bg-yellow-500 rounded-md mx-4'>
-                    <input type="text" className='h-full w-6 p-2 px-4 flex-grow rounded-l-md focus:outline-none' />
+
+                <div className='hidden relative sm:flex items-center h-10 flex-grow bg-yellow-400 hover:bg-yellow-500 rounded-md mx-4 '>
+
+                    <p className='pl-2 flex link items-center space-x-2 w-auto h-full bg-white rounded-tl-md rounded-bl-md border-r-[1px] border-r-gray-200 pr-3'>
+                        <AiOutlineMenu size={22} />
+                        <span onClick={() => router.push("/all")}>All</span >
+                    </p>
+
+                    <input
+                        type="text"
+                        placeholder='Search... '
+                        className='h-full w-6 p-2 px-4 flex-grow  focus:outline-none'
+                        onChange={handlechnage}
+                        value={searchterm}
+                        onMouseOver={() => setshowresults(true)}
+                        onBlur={() => setshowresults(false)}
+                        onFocus={() => setshowresults(true)}
+                    />
                     <AiOutlineSearch size={24} className="mx-3 cursor-pointer
                     " />
+                    {/* searchlist */}
+                    {showresults && (
+                        <div
+                            onClick={() => setshowresults(true)}
+                            onMouseOver={() => setshowresults(true)}
+                            onMouseLeave={() => setshowresults(false)}
+                            style={{ maxHeight: '400px', overflowY: 'auto' }}
+                            className=' bg-white rounded-md absolute top-10 z-50 w-full'>
+                            {(!!searchresults.length) ? (searchresults?.map(({ image, id, name, category, price }) => (
+                                <div className='flex justify-between items-center bg-gray-100 rounded-md my-2 p-2' key={id}>
+                                    {/* search-left */}
+                                    <div className='flex gap-3'>
+                                        <img src={image} alt={name} className='h-10 w-10 rounded-lg object-cover' />
+                                        <div>
+                                            <h3 className='text-sm font-semibold'>{name}</h3>
+                                            <p className='text-sm text-gray-500'>{category}</p>
+                                        </div>
+                                    </div>
+                                    {/* search-right */}
+                                    <div className='flex gap-4 items-center'>
+                                        <div>
+                                            <Currency quantity={price} currency="GBP" />
+                                        </div>
+                                        <span><AiOutlineClose size={16} /></span>
+                                    </div>
+                                </div>
+                            ))) : (
+                                <>
+                                    {searchterm && <p className='text-lg font-semibold text-gray-500 py-2'>No product found</p>}
+                                </>
+                            )
+                            }
+                        </div>
+                    )}
+
                 </div>
+
+
+
                 {/* right */}
                 <div className='flex space-x-2 md:space-x-5 items-center text-white text-[13px] '>
                     <div className='link' onClick={!user ? loginwithgoogle : singout} >
@@ -81,10 +146,7 @@ const index = () => {
             </div>
             {/* bottom nav */}
             <div className='flex items-center bg-[#232F3E] text-white p-2 pl-4 space-x-3'>
-                <p className='flex link items-center space-x-3'>
-                    <AiOutlineMenu size={25} />
-                    <span onClick={() => router.push("/All")}>All</span >
-                </p>
+
                 <p className='link'>Prime video</p>
                 <p className='link'>Amazon Business</p>
                 <p className='link  hidden sm:inline-flex'>Today's Deals</p>

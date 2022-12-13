@@ -6,9 +6,14 @@ export const BasketSlice = createSlice({
    name: 'basket',
    initialState,
    reducers: {
+      addtoProduct: (state, action) => {
+         state.items = action.payload
+      },
+
       addToBasket: (state, action) => {
          state.items = [...state.items, action.payload]
       },
+
       removeFromBasket: (state, action) => {
          const index = state.items.findIndex(basket => basket.id === action.payload.id)
          let newbasket = [...state.items]
@@ -23,8 +28,8 @@ export const BasketSlice = createSlice({
 })
 
 
-export const { addToBasket, removeFromBasket } = BasketSlice.actions
-
+export const { addToBasket, removeFromBasket, addtoProduct } = BasketSlice.actions
+export const SelectProducts = (state) => state.basket.items
 export const SelectedItems = (state) => state.basket.items
 export const baskettotal = (state) => state.basket.items.reduce((total, item) => (total += item.price), 0)
 
