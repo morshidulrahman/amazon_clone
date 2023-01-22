@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { SelectProducts } from "../app/redux/slices/Productslice";
 
 const AllPage = () => {
-  const [searchterm, setsearchterm] = useState("all");
+  const [searchterm, setsearchterm] = useState("");
   const [selectcategory, setselectedcategory] = useState("all");
   const [products, setproducts] = useState([]);
   const [category, setcategory] = useState([]);
@@ -40,7 +40,7 @@ const AllPage = () => {
       "all",
       ...new Set(ProductsData?.map((item) => item.category)),
     ]);
-  }, [ProductsData, searchterm]);
+  }, [ProductsData]);
 
   useEffect(() => {
     if (selectcategory === "all") {
