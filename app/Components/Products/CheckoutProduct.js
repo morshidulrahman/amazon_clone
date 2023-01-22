@@ -65,7 +65,7 @@ const CheckoutProduct = ({
           </div>
         ) : (
           <div className="font-semibold mb-3 flex">
-            <p>price & quantity</p>
+            <p>price & quantity = </p>
             <Currency quantity={total} currency="GBP" />
           </div>
         )}

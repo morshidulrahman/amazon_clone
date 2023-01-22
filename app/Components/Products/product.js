@@ -4,6 +4,8 @@ import Currency from "react-currency-formatter";
 import { useDispatch, useSelector } from "react-redux";
 import { addToBasket, SelectedItems } from "../../redux/slices/Basketslice";
 import { showNotification } from "@mantine/notifications";
+import Image from "next/image";
+
 const MaxNumber = 5;
 const MinNumber = 1;
 
@@ -61,10 +63,12 @@ const Product = ({ id, title, price, description, category, image }) => {
       <p className="capitalize absolute top-4 right-4 italic text-sm text-gray-400">
         {category}
       </p>
-      <img
+      <Image
         src={image}
         alt="image"
-        className="w-48 h-48 object-contain mx-auto"
+        width={192}
+        height={192}
+        objectFit="contain"
       />
       <h4
         className="

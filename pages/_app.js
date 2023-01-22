@@ -4,7 +4,7 @@ import { store } from "../app/redux/Store";
 import { Provider } from "react-redux";
 import { MantineProvider } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
-function MyApp({ Component, pageProps, session }) {
+function MyApp({ Component, pageProps }) {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
       <NotificationsProvider position="top-right" zIndex={2077}>

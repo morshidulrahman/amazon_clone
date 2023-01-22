@@ -4,6 +4,7 @@ import { baskettotal, SelectedItems } from "../app/redux/slices/Basketslice";
 import CheckoutProduct from "../app/Components/Products/CheckoutProduct";
 import Currency from "react-currency-formatter";
 import { SelectUser } from "../app/redux/slices/Authslice";
+import Image from "next/image";
 
 const Checkout = () => {
   const items = useSelector(SelectedItems);
@@ -16,9 +17,12 @@ const Checkout = () => {
       <main className="lg:flex max-w-screen-2xl mx-auto lg:w-[1150px]">
         {/* left */}
         <div className="flex-grow m-5 shadow-sm">
-          <img
+          <Image
             src="https://cdn.mos.cms.futurecdn.net/ZefaoejrEEiKKo7pBmCaL6.jpg"
-            className="object-cover w-[1020px] h-[350px]"
+            objectFit="cover"
+            loading="lazy"
+            width={1020}
+            height={350}
             alt="chekcout"
           />
           <div className="flex flex-col py-10 bg-white p-5">
