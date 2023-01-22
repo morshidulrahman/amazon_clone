@@ -27,6 +27,7 @@ const Footer = () => {
               <a
                 href="https://portfolio2-vod7.vercel.app/"
                 target="_blank"
+                rel="noreferrer"
                 className="text-white text-sm "
               >
                 All rights reserved by{" "}
