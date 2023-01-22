@@ -23,7 +23,12 @@ const Footer = () => {
         <div className="bg-[#232F3E] border-t-[1px] border-t-gray-600">
           <div className="max-w-5xl mx-auto py-5">
             <div className="flex justify-between items-center">
-              <Image src={"/images/amazon-logo.png"} width={100} height={40} />
+              <Image
+                src={"/images/amazon-logo.png"}
+                width={100}
+                height={40}
+                alt="amazon"
+              />
               <a
                 href="https://portfolio2-vod7.vercel.app/"
                 target="_blank"
