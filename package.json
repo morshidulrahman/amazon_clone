@@ -16,7 +16,6 @@
     "@mantine/next": "^5.10.0",
     "@mantine/notifications": "^5.10.0",
     "@reduxjs/toolkit": "^1.9.0",
-    "@stripe/stripe-js": "^1.44.1",
     "@tailwindcss/line-clamp": "^0.4.2",
     "axios": "^0.21.1",
     "eslint": "8.26.0",
